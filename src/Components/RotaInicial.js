@@ -1,7 +1,8 @@
+//Bibliotecas
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
 import styled from 'styled-components';
+//Componentes
 import PostFilm from './PostFilm';
 
 
@@ -48,7 +49,6 @@ const ContContainer = styled.div`
     flex-wrap:wrap;
 
 `
-
 const Conteudo1 = styled.div`
     display:flex;
     align-items:center;

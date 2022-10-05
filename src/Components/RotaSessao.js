@@ -77,7 +77,6 @@ const Conteudo1 = styled.div`
     justify-content:center;
     }
 `
-
 const SessaoHorario = styled.div`
     width: 241px;
     height: 35px;
@@ -106,8 +105,6 @@ const SessaoHorario = styled.div`
 
 
 `
-
-
 const ConteudoHorario = styled.div`
    display:flex;
   
@@ -134,7 +131,6 @@ const ConteudoHorario = styled.div`
   }
 
 `
-
 const Responsivo = styled.div`
 @media (min-width: 600px){
     display:flex;

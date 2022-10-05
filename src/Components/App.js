@@ -1,11 +1,12 @@
+//Bibliotecas
 import { createGlobalStyle } from 'styled-components'
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+// Componentes 
 import RotaSessao from './RotaSessao';
-
 import Logo from "./Logo"
 import RotaInicial from './RotaInicial'
+import RotaAssentos from "./RotaAssentos"
+import RotaSucesso from "./RotaSucesso"
 
 export default function App() {
     return (
@@ -14,8 +15,10 @@ export default function App() {
             <Logo />
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<RotaInicial />} />  
+                    <Route path="/" element={<RotaInicial />} />
                     <Route path="/sessoes" element={<RotaSessao />} />
+                    <Route path="/assentos" element={<RotaAssentos />} />
+                    <Route path="/sucesso" element={<RotaSucesso />} />
                 </Routes>
             </BrowserRouter>
         </>
