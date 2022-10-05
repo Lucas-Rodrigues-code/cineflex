@@ -3,38 +3,36 @@ import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 import PostFilm from './PostFilm';
-import TituloSecao from './TituloSecao';
+
 
 export default function Conteudo() {
 
-    const [dados, setDados] = useState([])
+    const [dados, setDados] = useState([]);
 
-    useEffect(()=> {
+    useEffect(() => {
         const promessa = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies")
-        console.log(promessa)
+
         promessa.then((res) => {
-            console.log(res.data, "aqui")
             setDados(res.data)
-           
+
         });
 
-        promessa.catch(()=> {
+        promessa.catch(() => {
             console.log("deu erro")
-        })
+        });
 
-    }, [])
+    }, []);
 
-    
+
 
     return (
-        <>
+        <ContContainer>
             <Conteudo1>
-                <TituloSecao />
+                <h1>Selecione o filme</h1>
             </Conteudo1>
-            <ContContainer>
-               {dados.map((dado) => <PostFilm key={dado.id} dados={dado}/> )} 
-            </ContContainer>
-        </>
+            {dados.map((dado) => <PostFilm key={dado.id} dados={dado} />)}
+
+        </ContContainer>
     )
 }
 
@@ -56,4 +54,24 @@ const Conteudo1 = styled.div`
     align-items:center;
     justify-content:center;
     background-color:#E5E5E5;
+
+    h1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #293845;
+    
+    width: 374px;
+    height: 110px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    }
 `

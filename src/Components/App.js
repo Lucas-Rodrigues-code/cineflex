@@ -1,5 +1,9 @@
 import { createGlobalStyle } from 'styled-components'
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Sessao from './Sessao';
+
 import Logo from "./Logo"
 import Conteudo from './Conteudo'
 
@@ -8,7 +12,12 @@ export default function App() {
         <>
             <GlobalStyle />
             <Logo />
-            <Conteudo/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Conteudo />} />  {/* pagina princiapl */}
+                    <Route path="/sessoes" element={<Sessao />} />
+                </Routes>
+            </BrowserRouter>
         </>
     )
 }
@@ -19,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         box-sizing:border-box;
         margin:0;
-    
+        background: #E5E5E5;
 
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
