@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export default function PostFilm() {
+export default function PostFilm({dados}) {
+    
     return (
         <Post>
-            <img src="https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg" alt="Filme" />
+            <img src={dados.posterURL} alt="Filme" />
         </Post>
     )
 }
