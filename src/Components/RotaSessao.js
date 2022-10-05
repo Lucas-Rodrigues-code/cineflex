@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function Sessao() {
+export default function RotaSessao() {
     return (
         <>
             <ContContainer>

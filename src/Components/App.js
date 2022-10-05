@@ -2,10 +2,10 @@ import { createGlobalStyle } from 'styled-components'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Sessao from './Sessao';
+import RotaSessao from './RotaSessao';
 
 import Logo from "./Logo"
-import Conteudo from './Conteudo'
+import RotaInicial from './RotaInicial'
 
 export default function App() {
     return (
@@ -14,8 +14,8 @@ export default function App() {
             <Logo />
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Conteudo />} />  {/* pagina princiapl */}
-                    <Route path="/sessoes" element={<Sessao />} />
+                    <Route path="/" element={<RotaInicial />} />  
+                    <Route path="/sessoes" element={<RotaSessao />} />
                 </Routes>
             </BrowserRouter>
         </>

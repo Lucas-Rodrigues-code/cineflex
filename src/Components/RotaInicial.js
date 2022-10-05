@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import PostFilm from './PostFilm';
 
 
-export default function Conteudo() {
+export default function RotaInicial() {
 
     const [dados, setDados] = useState([]);
 
