@@ -94,7 +94,6 @@ export default function RotaAssentos() {
                     <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="filme" />
                 </Post>
                 <span>Liga da Justiça <br/>Quinta-feira - 15:00</span>
-                
             </FooterContainer>
 
         </>
@@ -246,14 +245,12 @@ const Indisponível = styled.div`
     border-radius: 17px;
     
 `
-
 const Info = styled.div`
     display:flex;
    
 
 
 `
-
 const Legenda = styled.div`
     display:flex;
    
@@ -268,7 +265,6 @@ const Legenda = styled.div`
     }
     
 `
-
 const ContainerInput = styled.div`
     width:100%;
     height:auto;
@@ -313,8 +309,6 @@ const ContainerInput = styled.div`
     }
 
 `
-
-
 const FooterContainer = styled.div`
     width: 100%;
     height: 117px;

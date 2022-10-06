@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom"
 //Componentes
 import PostFilm from './PostFilm';
 
@@ -9,6 +10,7 @@ import PostFilm from './PostFilm';
 export default function RotaInicial() {
 
     const [dados, setDados] = useState([]);
+
 
     useEffect(() => {
         const promessa = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies")
@@ -27,13 +29,14 @@ export default function RotaInicial() {
 
 
     return (
-        <ContContainer>
+        <>
             <Conteudo1>
                 <h1>Selecione o filme</h1>
             </Conteudo1>
-            {dados.map((dado) => <PostFilm key={dado.id} dados={dado} />)}
-
-        </ContContainer>
+            <ContContainer>
+                {dados.map((dado) => <PostFilm key={dado.id} dados={dado} />)}
+            </ContContainer>
+        </>
     )
 }
 

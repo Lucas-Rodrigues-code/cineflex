@@ -1,11 +1,16 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom"
 
-export default function PostFilm({dados}) {
-    
+export default function PostFilm({ dados }) {
+
     return (
-        <Post>
-            <img src={dados.posterURL} alt="Filme" />
-        </Post>
+        <>
+            <Link to={`/sessoes/${dados.id}`}>
+                <Post>
+                    <img src={dados.posterURL} alt="Filme" />
+                </Post>
+            </Link>
+        </>
     )
 }
 

@@ -1,6 +1,28 @@
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function RotaSessao() {
+
+    const { idFilme } = useParams();
+    const [dados, setDados] = useState({})
+
+    useEffect(()=>{
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
+        promise.then((res)=>{
+            console.log(res)
+            setDados(res.data)
+
+        })
+        promise.catch(()=>{
+            console.log("deu erro")
+        })
+
+
+    },[])
+    
+
     return (
         <>
             <ContContainer>
@@ -29,9 +51,9 @@ export default function RotaSessao() {
 
             <FooterContainer>
                 <Post>
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="filme" />
+                    <img src={dados.posterURL} alt="filme" />
                 </Post>
-                <h1>Liga da Justiça</h1>
+                <h1>{dados.title}</h1>
             </FooterContainer>
         </>
     )
