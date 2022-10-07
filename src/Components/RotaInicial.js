@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from "react-router-dom"
 //Componentes
 import PostFilm from './PostFilm';
 
@@ -26,7 +25,7 @@ export default function RotaInicial() {
 
     }, []);
 
-
+console.log(dados, "aqui")
 
     return (
         <>

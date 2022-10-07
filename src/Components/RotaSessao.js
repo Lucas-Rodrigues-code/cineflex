@@ -2,61 +2,53 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Sessao from './Sessao';
 
 export default function RotaSessao() {
 
     const { idFilme } = useParams();
-    const [dados, setDados] = useState({})
+    const [dados, setDados] = useState(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
-        promise.then((res)=>{
-            console.log(res)
+        promise.then((res) => {
+
             setDados(res.data)
 
         })
-        promise.catch(()=>{
+        promise.catch(() => {
             console.log("deu erro")
         })
 
 
-    },[])
-    
+    }, [])
 
-    return (
-        <>
-            <ContContainer>
-                <Conteudo1>
-                    <h1>Selecione o horário</h1>
-                </Conteudo1>
-            </ContContainer>
+    if (dados === null) {
+        return <div>Carregando...</div>
+    }
+    if (dados !== null) {
 
-            <Responsivo>
-                <SessaoHorario>
-                    <h1>Quinta-feira - 24/06/2021</h1>
-                </SessaoHorario>
-                <ConteudoHorario>
-                    <button>15:00</button>
-                    <button>19:00</button>
-                </ConteudoHorario>
+        return (
+            <>
+                <ContContainer>
+                    <Conteudo1>
+                        <h1>Selecione o horário</h1>
+                    </Conteudo1>
+                </ContContainer>
 
-                <SessaoHorario>
-                    <h1>Sexta-feira - 25/06/2021</h1>
-                </SessaoHorario>
-                <ConteudoHorario>
-                    <button>15:00</button>
-                    <button>19:00</button>
-                </ConteudoHorario>
-            </Responsivo>
+                <Responsivo>
+                    {dados.days.map((d) => <Sessao key={d.id} dado={d} />)}
+                </Responsivo>
 
-            <FooterContainer>
-                <Post>
-                    <img src={dados.posterURL} alt="filme" />
-                </Post>
-                <h1>{dados.title}</h1>
-            </FooterContainer>
-        </>
-    )
+                <FooterContainer>
+                    <Post>
+                        <img src={dados.posterURL} alt="filme" />
+                    </Post>
+                    <h1>{dados.title}</h1>
+                </FooterContainer>
+            </>
+        )
+    }
 }
 
 
@@ -91,7 +83,7 @@ const Conteudo1 = styled.div`
     letter-spacing: 0.04em;
     color: #293845;
     
-    width: 374px;
+    width: 360px;
     height: 110px;
 
     display:flex;
@@ -99,61 +91,8 @@ const Conteudo1 = styled.div`
     justify-content:center;
     }
 `
-const SessaoHorario = styled.div`
-    width: 241px;
-    height: 35px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.02em;
-
-    color: #293845;
-
-    display:flex;
-    flex-direction:row;
-
-    margin-left:24px;
-    margin-top:22px;
-
-    
-
-  
-
-
-
-`
-const ConteudoHorario = styled.div`
-   display:flex;
-  
-
-  button{
-    width: 82px;
-    height: 43px;
-    color: #FFFFFF;
-
-    background: #E8833A;
-    border-radius: 3px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.02em;
-    margin-left:24px;
-    margin-top:22px;
-  }
-
-`
 const Responsivo = styled.div`
+  
 @media (min-width: 600px){
     display:flex;
     align-items: center;
