@@ -1,7 +1,9 @@
+//Bibliotecas
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+//Componentes
 import Sessao from './Sessao';
 
 export default function RotaSessao() {
@@ -37,7 +39,7 @@ export default function RotaSessao() {
                 </ContContainer>
 
                 <Responsivo>
-                    {dados.days.map((d) => <Sessao key={d.id} dado={d} />)}
+                    {dados.days.map((d) => <Sessao key={d.id} dado={d}  />)}
                 </Responsivo>
 
                 <FooterContainer>

@@ -1,6 +1,29 @@
+//Bibliotecas
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function RotaAssentos() {
+
+    const { idSessao } = useParams();
+    const [dados, setDados] = useState(null)
+
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
+
+        promise.then((res) => {
+
+            setDados(res.data)
+
+        })
+        promise.catch(() => {
+            console.log("deu erro")
+        })
+
+
+    }, [])
+
     return (
         <>
             <ContainerTitulo>
@@ -71,29 +94,29 @@ export default function RotaAssentos() {
             </Container>
             <ContainerInfo>
                 <Info>
-                <Selecionado/>
-                <Disponível/>
-                <Indisponível/>
+                    <Selecionado />
+                    <Disponível />
+                    <Indisponível />
                 </Info>
                 <Legenda>
                     <h1>Selecionado</h1>
                     <h1>Disponível</h1>
                     <h1>Indisponível</h1>
                 </Legenda>
-                
+
 
             </ContainerInfo>
             <ContainerInput>
                 <h1>Nome do comprador:</h1>
-                <input placeholder='Digite seu nome...'/>
+                <input placeholder='Digite seu nome...' />
                 <h1>CPF do comprador:</h1>
-                <input placeholder='Digite seu CPF...'/>
+                <input placeholder='Digite seu CPF...' />
             </ContainerInput>
             <FooterContainer>
                 <Post>
                     <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="filme" />
                 </Post>
-                <span>Liga da Justiça <br/>Quinta-feira - 15:00</span>
+                <span>Liga da Justiça <br />Quinta-feira - 15:00</span>
             </FooterContainer>
 
         </>
@@ -130,7 +153,7 @@ const Titulo = styled.div`
     letter-spacing: 0.04em;
     color: #293845;
     
-    width: 374px;
+    width: 360px;
     height: 110px;
 
     display:flex;
@@ -193,10 +216,10 @@ color: #000000;
 
 `
 const ContainerButtun = styled.div`
-    margin-left:24px;
-    margin-right:24px;
+   margin-left:10px;
     display:flex;
     flex-wrap:wrap;
+    width:350px;
 `
 const ContainerInfo = styled.div`
     width:100%;

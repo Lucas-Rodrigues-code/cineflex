@@ -25,7 +25,7 @@ export default function RotaInicial() {
 
     }, []);
 
-console.log(dados, "aqui")
+
 
     return (
         <>

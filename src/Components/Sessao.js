@@ -1,16 +1,24 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom"
 
 export default function Sessao({ dado }) {
-    console.log(dado)
+   
     return (
         <>
+
             <SessaoHorario>
                 <h1>{dado.weekday} - {dado.date}</h1>
             </SessaoHorario>
             <ConteudoHorario>
-                <button>{dado.showtimes[0].name}</button>
-                <button>{dado.showtimes[1].name}</button>
+                {dado.showtimes.map((showtime) => {
+                    return(
+                    <Link to={`/assentos/${showtime.id}`} key={showtime.id}>
+                        <button>{showtime.name}</button>
+                    </Link>)
+
+                })}
             </ConteudoHorario>
+
         </>
     )
 }

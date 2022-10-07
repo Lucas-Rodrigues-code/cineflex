@@ -17,7 +17,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<RotaInicial />} />
                     <Route path="/sessoes/:idFilme" element={<RotaSessao />} />
-                    <Route path="/assentos" element={<RotaAssentos />} />
+                    <Route path="/assentos/:idSessao" element={<RotaAssentos />} />
                     <Route path="/sucesso" element={<RotaSucesso />} />
                 </Routes>
             </BrowserRouter>
