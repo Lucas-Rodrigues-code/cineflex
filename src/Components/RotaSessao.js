@@ -23,7 +23,7 @@ export default function RotaSessao() {
         })
 
 
-    }, [])
+    }, [idFilme])
 
     if (dados === null) {
         return <div>Carregando...</div>

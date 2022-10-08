@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Seat from './Seat';
 
 export default function RotaAssentos() {
 
@@ -13,7 +14,7 @@ export default function RotaAssentos() {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
 
         promise.then((res) => {
-
+            console.log(res)
             setDados(res.data)
 
         })
@@ -22,109 +23,64 @@ export default function RotaAssentos() {
         })
 
 
-    }, [])
+    }, [idSessao])
 
-    return (
-        <>
-            <ContainerTitulo>
-                <Titulo>
-                    <h1>Selecione o(s) assento(s)</h1>
-                </Titulo>
-            </ContainerTitulo>
+        if (dados === null) {
+            return <div>Carregando...</div>
+        }
+        if (dados !== null) {
 
-            <Container>
-                <ContainerAssentos>
-                    <ContainerButtun>
-                        <button>01</button>
-                        <button>02</button>
-                        <button>03</button>
-                        <button>04</button>
-                        <button>05</button>
-                        <button>06</button>
-                        <button>07</button>
-                        <button>08</button>
-                        <button>09</button>
-                        <button>10</button>
+            return (
+                <>
+                    <ContainerTitulo>
+                        <Titulo>
+                            <h1>Selecione os assentos</h1>
+                        </Titulo>
+                    </ContainerTitulo>
 
-                        <button>01</button>
-                        <button>02</button>
-                        <button>03</button>
-                        <button>04</button>
-                        <button>05</button>
-                        <button>06</button>
-                        <button>07</button>
-                        <button>08</button>
-                        <button>09</button>
-                        <button>10</button>
+                    <Container>
+                        <ContainerAssentos>
+                            <ContainerButtun>
+                                {dados.seats.map((seat) => <Seat dados={seat} key={seat.id} />)}
 
-                        <button>01</button>
-                        <button>02</button>
-                        <button>03</button>
-                        <button>04</button>
-                        <button>05</button>
-                        <button>06</button>
-                        <button>07</button>
-                        <button>08</button>
-                        <button>09</button>
-                        <button>10</button>
-
-                        <button>01</button>
-                        <button>02</button>
-                        <button>03</button>
-                        <button>04</button>
-                        <button>05</button>
-                        <button>06</button>
-                        <button>07</button>
-                        <button>08</button>
-                        <button>09</button>
-                        <button>10</button>
-
-                        <button>01</button>
-                        <button>02</button>
-                        <button>03</button>
-                        <button>04</button>
-                        <button>05</button>
-                        <button>06</button>
-                        <button>07</button>
-                        <button>08</button>
-                        <button>09</button>
-                        <button>10</button>
-                    </ContainerButtun>
-                </ContainerAssentos>
-            </Container>
-            <ContainerInfo>
-                <Info>
-                    <Selecionado />
-                    <Disponível />
-                    <Indisponível />
-                </Info>
-                <Legenda>
-                    <h1>Selecionado</h1>
-                    <h1>Disponível</h1>
-                    <h1>Indisponível</h1>
-                </Legenda>
+                            </ContainerButtun>
+                        </ContainerAssentos>
+                    </Container>
+                    <ContainerInfo>
+                        <Info>
+                            <Selecionado />
+                            <Disponível />
+                            <Indisponível />
+                        </Info>
+                        <Legenda>
+                            <h1>Selecionado</h1>
+                            <h1>Disponível</h1>
+                            <h1>Indisponível</h1>
+                        </Legenda>
 
 
-            </ContainerInfo>
-            <ContainerInput>
-                <h1>Nome do comprador:</h1>
-                <input placeholder='Digite seu nome...' />
-                <h1>CPF do comprador:</h1>
-                <input placeholder='Digite seu CPF...' />
-            </ContainerInput>
-            <FooterContainer>
-                <Post>
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="filme" />
-                </Post>
-                <span>Liga da Justiça <br />Quinta-feira - 15:00</span>
-            </FooterContainer>
+                    </ContainerInfo>
+                    <ContainerInput>
+                        <h1>Nome do comprador:</h1>
+                        <input placeholder='Digite seu nome...' />
+                        <h1>CPF do comprador:</h1>
+                        <input placeholder='Digite seu CPF...' />
+                    </ContainerInput>
+                    <FooterContainer>
+                        <Post>
+                            <img src={dados.movie.posterURL} alt="filme" />
+                        </Post>
+                        <span>{dados.movie.title}<br />{dados.day.weekday} - {dados.name}</span>
+                    </FooterContainer>
 
-        </>
-    )
-}
+                </>
+            )
+        }
+    }
 
 
-const ContainerTitulo = styled.div`
+
+    const ContainerTitulo = styled.div`
     width: 100%;
     height:auto;
     display:flex;
@@ -135,7 +91,7 @@ const ContainerTitulo = styled.div`
    
 
 `
-const Titulo = styled.div`
+    const Titulo = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
@@ -161,7 +117,7 @@ const Titulo = styled.div`
     justify-content:center;
     }
 `
-const Container = styled.div`
+    const Container = styled.div`
     width:100%;
     height:auto;
     display:flex;
@@ -169,7 +125,7 @@ const Container = styled.div`
     align-items:center;
 
 `
-const ContainerAssentos = styled.div`
+    const ContainerAssentos = styled.div`
     width:100%;
     height:auto;
 
@@ -215,13 +171,13 @@ color: #000000;
 
 
 `
-const ContainerButtun = styled.div`
+    const ContainerButtun = styled.div`
    margin-left:10px;
     display:flex;
     flex-wrap:wrap;
     width:350px;
 `
-const ContainerInfo = styled.div`
+    const ContainerInfo = styled.div`
     width:100%;
     height:50px;
    
@@ -234,7 +190,7 @@ const ContainerInfo = styled.div`
 
 
 `
-const Selecionado = styled.div`
+    const Selecionado = styled.div`
     width: 25px;
     height: 25px;
 
@@ -245,7 +201,7 @@ const Selecionado = styled.div`
     border-radius: 17px;
     
 `
-const Disponível = styled.div`
+    const Disponível = styled.div`
     width: 25px;
     height: 25px;
 
@@ -257,7 +213,7 @@ const Disponível = styled.div`
     border-radius: 17px;
     
 `
-const Indisponível = styled.div`
+    const Indisponível = styled.div`
     width: 25px;
     height: 25px;
     
@@ -268,13 +224,13 @@ const Indisponível = styled.div`
     border-radius: 17px;
     
 `
-const Info = styled.div`
+    const Info = styled.div`
     display:flex;
    
 
 
 `
-const Legenda = styled.div`
+    const Legenda = styled.div`
     display:flex;
    
     
@@ -288,7 +244,7 @@ const Legenda = styled.div`
     }
     
 `
-const ContainerInput = styled.div`
+    const ContainerInput = styled.div`
     width:100%;
     height:auto;
     margin-top:10px;
@@ -332,7 +288,7 @@ const ContainerInput = styled.div`
     }
 
 `
-const FooterContainer = styled.div`
+    const FooterContainer = styled.div`
     width: 100%;
     height: 117px;
 
@@ -361,7 +317,7 @@ const FooterContainer = styled.div`
     
    
 `
-const Post = styled.div`
+    const Post = styled.div`
 
     width: 64px;
     height: 89px;
