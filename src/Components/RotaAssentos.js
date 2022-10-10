@@ -130,7 +130,7 @@ export default function RotaAssentos() {
 
 `
     const ContainerAssentos = styled.div`
-    width:100%;
+    width:360px;
     height:auto;
 
     @media (min-width: 600px){
@@ -176,10 +176,11 @@ color: #000000;
 
 `
     const ContainerButtun = styled.div`
-   margin-left:20px;
+    margin-left:10px;
     display:flex;
     flex-wrap:wrap;
     width:350px;
+   
     gap: 5px;
 `
     const ContainerInfo = styled.div`
