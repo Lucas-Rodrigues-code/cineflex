@@ -9,12 +9,13 @@ export default function RotaAssentos() {
 
     const { idSessao } = useParams();
     const [dados, setDados] = useState(null)
+   
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
 
         promise.then((res) => {
-            console.log(res)
+            
             setDados(res.data)
 
         })
@@ -24,6 +25,9 @@ export default function RotaAssentos() {
 
 
     }, [idSessao])
+
+
+ 
 
         if (dados === null) {
             return <div>Carregando...</div>
@@ -41,7 +45,7 @@ export default function RotaAssentos() {
                     <Container>
                         <ContainerAssentos>
                             <ContainerButtun>
-                                {dados.seats.map((seat) => <Seat dados={seat} key={seat.id} />)}
+                                {dados.seats.map((seat) => <Seat seat={seat} key={seat.id} />)}
 
                             </ContainerButtun>
                         </ContainerAssentos>
@@ -172,10 +176,11 @@ color: #000000;
 
 `
     const ContainerButtun = styled.div`
-   margin-left:10px;
+   margin-left:20px;
     display:flex;
     flex-wrap:wrap;
     width:350px;
+    gap: 5px;
 `
     const ContainerInfo = styled.div`
     width:100%;
