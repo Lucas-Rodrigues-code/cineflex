@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function RotaSucesso() {
+export default function RotaSucesso({infoFinal}) {
+    console.log(infoFinal)
+
+    if(infoFinal === null){
+        return <div>Acesso não autorizado !</div>
+    }
     return (
         <>
             <TituloSucesso>
@@ -9,11 +14,11 @@ export default function RotaSucesso() {
             </TituloSucesso>
             <ContainerInfo>
                 <h1>Filme e sessão</h1>
-                <span>Enola Holmes 24/06/2021 15:00</span>
+                <span>{infoFinal.infoFinal.movie.title} {infoFinal.infoFinal.day.date} {infoFinal.infoFinal.name}</span>
                 <h1>Ingressos</h1>
-                <span>Assento 15<br />Assento 16</span>
+                {infoFinal.assentos.map((a,i) => <span key={i}>assento: {a}<br/></span>)}
                 <h1>Comprador</h1>
-                <span>Nome: João da Silva Sauro<br />CPF: 123.456.789-10</span>
+                <span>Nome: {infoFinal.user.name}<br />CPF: {infoFinal.user.cpf}</span>
 
             </ContainerInfo>
             <Botao>

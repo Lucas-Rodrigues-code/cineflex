@@ -7,13 +7,13 @@ export default function Sessao({ dado }) {
         <>
 
             <SessaoHorario>
-                <h1>{dado.weekday} - {dado.date}</h1>
+                <h1 data-identifier="session-date">{dado.weekday} - {dado.date}</h1>
             </SessaoHorario>
             <ConteudoHorario>
                 {dado.showtimes.map((showtime) => {
                     return(
                     <Link to={`/assentos/${showtime.id}`} key={showtime.id}>
-                        <button>{showtime.name}</button>
+                        <button data-identifier="hour-minute-btn">{showtime.name}</button>
                     </Link>)
 
                 })}

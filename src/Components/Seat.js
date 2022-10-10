@@ -31,7 +31,7 @@ export default function Seat({ seat, setSelectedSeats, selectedSeats}) {
                     <BotaoSelecionado onClick={() => handleSeat(seat)}>{seat.name}</BotaoSelecionado>
                 )
             :
-            <BotaoIndisponivel > {seat.name}</BotaoIndisponivel> }
+            <BotaoIndisponivel onClick={()=> alert("Assento já selecionado")} > {seat.name}</BotaoIndisponivel> }
         </>
 
     )

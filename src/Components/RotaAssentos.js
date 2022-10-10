@@ -6,24 +6,29 @@ import axios from 'axios';
 import Seat from './Seat';
 
 
-export default function RotaAssentos() {
+export default function RotaAssentos({setInfoFinal}) {
 
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [dados, setDados] = useState(null)
     const [nome, setNome] = useState("")
     const [cpf, setCpf] = useState("")
+
+   
+
+
+ 
     const navigate = useNavigate()
 
 
     const id = selectedSeats.map((s) => s.id)
-
+    const nameAssento = selectedSeats.map((s) => s.name)
 
 
     const { idSessao } = useParams();
 
-    console.log(cpf)
+    
     console.log(id)
-    console.log(nome)
+    
 
 
 
@@ -41,6 +46,9 @@ export default function RotaAssentos() {
 
 
     }, [idSessao])
+    console.log(dados,"here")
+
+   
 
     function AddIngressos(e) {
         e.preventDefault()
@@ -57,7 +65,12 @@ export default function RotaAssentos() {
 
         requisicao.then(() => {
 
-            alert("deuboa")
+             setInfoFinal({
+                infoFinal:dados,
+                assentos:nameAssento,
+                user:body
+        
+            })  
             navigate("/sucesso")
         })
         requisicao.catch((err) => {
@@ -66,7 +79,10 @@ export default function RotaAssentos() {
 
     }
 
-
+    
+   
+    
+    
 
 
     if (dados === null) {

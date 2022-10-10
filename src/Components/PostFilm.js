@@ -7,7 +7,7 @@ export default function PostFilm({ dados }) {
         <>
             <Link to={`/sessoes/${dados.id}`}>
                 <Post>
-                    <img src={dados.posterURL} alt="Filme" />
+                    <img src={dados.posterURL} alt="Filme" data-identifier="movie-outdoor"/>
                 </Post>
             </Link>
         </>

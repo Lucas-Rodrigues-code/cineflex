@@ -2,13 +2,19 @@
 import { createGlobalStyle } from 'styled-components'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Componentes 
-import RotaSessao from './RotaSessao';
-import Logo from "./Logo"
-import RotaInicial from './RotaInicial'
-import RotaAssentos from "./RotaAssentos"
-import RotaSucesso from "./RotaSucesso"
+import RotaSessao from './Components/RotaSessao';
+import Logo from "./Components/Logo"
+import RotaInicial from './Components/RotaInicial'
+import RotaAssentos from "./Components/RotaAssentos"
+import RotaSucesso from "./Components/RotaSucesso"
+import { useState } from 'react';
+
+
+
 
 export default function App() {
+    const [infoFinal,setInfoFinal] = useState(null)
+    console.log(infoFinal) 
     return (
         <>
             <GlobalStyle />
@@ -16,9 +22,9 @@ export default function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<RotaInicial />} />
-                    <Route path="/sessoes/:idFilme" element={<RotaSessao />} />
-                    <Route path="/assentos/:idSessao" element={<RotaAssentos />} />
-                    <Route path="/sucesso" element={<RotaSucesso />} />
+                    <Route path="/sessoes/:idFilme" element={<RotaSessao  />} />
+                    <Route path="/assentos/:idSessao" element={<RotaAssentos setInfoFinal={setInfoFinal} /> } />
+                    <Route path="/sucesso" element={<RotaSucesso infoFinal={infoFinal} />} />
                 </Routes>
             </BrowserRouter>
         </>
@@ -76,6 +82,10 @@ const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+    a{
+        text-decoration:none;
     }
+    }
+    
 `
 
