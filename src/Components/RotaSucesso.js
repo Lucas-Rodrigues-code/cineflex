@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function RotaSucesso({infoFinal}) {
-    console.log(infoFinal)
 
     if(infoFinal === null){
         return <div>Acesso não autorizado !</div>

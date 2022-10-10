@@ -13,24 +13,12 @@ export default function RotaAssentos({setInfoFinal}) {
     const [nome, setNome] = useState("")
     const [cpf, setCpf] = useState("")
 
-   
-
-
- 
+    const { idSessao } = useParams();
     const navigate = useNavigate()
 
 
     const id = selectedSeats.map((s) => s.id)
     const nameAssento = selectedSeats.map((s) => s.name)
-
-
-    const { idSessao } = useParams();
-
-    
-    console.log(id)
-    
-
-
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
@@ -46,10 +34,7 @@ export default function RotaAssentos({setInfoFinal}) {
 
 
     }, [idSessao])
-    console.log(dados,"here")
-
-   
-
+    
     function AddIngressos(e) {
         e.preventDefault()
 
@@ -60,7 +45,6 @@ export default function RotaAssentos({setInfoFinal}) {
 
         }
 
-        console.log(body, "aqui")
         const requisicao = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body)
 
         requisicao.then(() => {
@@ -78,12 +62,6 @@ export default function RotaAssentos({setInfoFinal}) {
         })
 
     }
-
-    
-   
-    
-    
-
 
     if (dados === null) {
         return <div>Carregando...</div>

@@ -14,7 +14,7 @@ import { useState } from 'react';
 
 export default function App() {
     const [infoFinal,setInfoFinal] = useState(null)
-    console.log(infoFinal) 
+   
     return (
         <>
             <GlobalStyle />

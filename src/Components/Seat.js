@@ -3,10 +3,6 @@ import styled from "styled-components"
 
 export default function Seat({ seat, setSelectedSeats, selectedSeats}) {
    
-
-    
-    
-    
     function handleSeat(seat) {
         
         if (seat.isAvailable === "false") {
