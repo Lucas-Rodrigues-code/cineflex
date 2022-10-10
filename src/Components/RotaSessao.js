@@ -44,9 +44,9 @@ export default function RotaSessao() {
 
                 <FooterContainer>
                     <Post>
-                        <img src={dados.posterURL} alt="filme" />
+                        <img src={dados.posterURL} alt="filme" data-identifier="movie-img-preview" />
                     </Post>
-                    <h1>{dados.title}</h1>
+                    <h1 data-identifier="movie-and-session-infos-preview">{dados.title}</h1>
                 </FooterContainer>
             </>
         )

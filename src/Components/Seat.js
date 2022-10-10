@@ -22,12 +22,12 @@ export default function Seat({ seat, setSelectedSeats, selectedSeats}) {
         <>
             {seat.isAvailable ? 
                 !seat.selected ? (
-                    <BotaoDisponivel onClick={() => handleSeat(seat)}>{seat.name}</BotaoDisponivel>
+                    <BotaoDisponivel onClick={() => handleSeat(seat)} data-identifier="seat">{seat.name}</BotaoDisponivel>
                 ) : (
-                    <BotaoSelecionado onClick={() => handleSeat(seat)}>{seat.name}</BotaoSelecionado>
+                    <BotaoSelecionado onClick={() => handleSeat(seat)} data-identifier="seat">{seat.name}</BotaoSelecionado>
                 )
             :
-            <BotaoIndisponivel onClick={()=> alert("Assento já selecionado")} > {seat.name}</BotaoIndisponivel> }
+            <BotaoIndisponivel onClick={()=> alert("Assento já selecionado")} data-identifier="seat"> {seat.name}</BotaoIndisponivel> }
         </>
 
     )

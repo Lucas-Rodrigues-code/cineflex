@@ -86,9 +86,9 @@ export default function RotaAssentos({setInfoFinal}) {
                 </Container>
                 <ContainerInfo>
                     <Info>
-                        <Selecionado />
-                        <Disponível />
-                        <Indisponível />
+                        <Selecionado data-identifier="seat-selected-subtitle"/>
+                        <Disponível data-identifier="seat-available-subtitle"/>
+                        <Indisponível data-identifier="seat-unavailable-subtitle"/>
                     </Info>
                     <Legenda>
                         <h1>Selecionado</h1>
@@ -101,17 +101,17 @@ export default function RotaAssentos({setInfoFinal}) {
                 <ContainerInput>
                     <form>
                         <h1>Nome do comprador:</h1>
-                        <input placeholder='Digite seu nome...' value={nome} onChange={e => setNome(e.target.value)} required />
+                        <input placeholder='Digite seu nome...' value={nome} onChange={e => setNome(e.target.value)} required data-identifier="buyer-name-input"/>
                         <h1>CPF do comprador:</h1>
-                        <input placeholder='Digite seu CPF...' value={cpf} onChange={e => setCpf(e.target.value)} required />
-                        <button onClick={AddIngressos}>Reservar assento(s)</button>
+                        <input placeholder='Digite seu CPF...' value={cpf} onChange={e => setCpf(e.target.value)} required data-identifier="buyer-cpf-input"/>
+                        <button onClick={AddIngressos} data-identifier="reservation-btn">Reservar assento(s)</button>
                     </form>
                 </ContainerInput>
                 <FooterContainer>
                     <Post>
                         <img src={dados.movie.posterURL} alt="filme" />
                     </Post>
-                    <span>{dados.movie.title}<br />{dados.day.weekday} - {dados.name}</span>
+                    <span data-identifier="movie-and-session-infos-preview">{dados.movie.title}<br />{dados.day.weekday} - {dados.name}</span>
                 </FooterContainer>
                 
 

@@ -13,16 +13,16 @@ export default function RotaSucesso({infoFinal}) {
             </TituloSucesso>
             <ContainerInfo>
                 <h1>Filme e sessão</h1>
-                <span>{infoFinal.infoFinal.movie.title} {infoFinal.infoFinal.day.date} {infoFinal.infoFinal.name}</span>
+                <span data-identifier="movie-session-infos-reserve-finished">{infoFinal.infoFinal.movie.title} {infoFinal.infoFinal.day.date} {infoFinal.infoFinal.name}</span>
                 <h1>Ingressos</h1>
-                {infoFinal.assentos.map((a,i) => <span key={i}>assento: {a}<br/></span>)}
+                {infoFinal.assentos.map((a,i) => <span key={i} data-identifier="seat-infos-reserve-finished">assento: {a}<br/></span>)}
                 <h1>Comprador</h1>
-                <span>Nome: {infoFinal.user.name}<br />CPF: {infoFinal.user.cpf}</span>
+                <span data-identifier="buyer-infos-reserve-finished">Nome: {infoFinal.user.name}<br />CPF: {infoFinal.user.cpf}</span>
 
             </ContainerInfo>
             <Botao>
                 <Link to={"/"}>
-                    <button>Voltar pra Home</button>
+                    <button data-identifier="back-to-home-btn">Voltar pra Home</button>
                 </Link>
             </Botao>
         </>
