@@ -1,21 +1,37 @@
 //Bibliotecas
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Seat from './Seat';
 
+
 export default function RotaAssentos() {
 
-    const { idSessao } = useParams();
+    const [selectedSeats, setSelectedSeats] = useState([]);
     const [dados, setDados] = useState(null)
-   
+    const [nome, setNome] = useState("")
+    const [cpf, setCpf] = useState("")
+    const navigate = useNavigate()
+
+
+    const id = selectedSeats.map((s) => s.id)
+
+
+
+    const { idSessao } = useParams();
+
+    console.log(cpf)
+    console.log(id)
+    console.log(nome)
+
+
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
 
         promise.then((res) => {
-            
+
             setDados(res.data)
 
         })
@@ -26,65 +42,93 @@ export default function RotaAssentos() {
 
     }, [idSessao])
 
+    function AddIngressos(e) {
+        e.preventDefault()
 
- 
+        const body = {
+            ids: id,
+            name: nome,
+            cpf: cpf
 
-        if (dados === null) {
-            return <div>Carregando...</div>
         }
-        if (dados !== null) {
 
-            return (
-                <>
-                    <ContainerTitulo>
-                        <Titulo>
-                            <h1>Selecione os assentos</h1>
-                        </Titulo>
-                    </ContainerTitulo>
+        console.log(body, "aqui")
+        const requisicao = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body)
 
-                    <Container>
-                        <ContainerAssentos>
-                            <ContainerButtun>
-                                {dados.seats.map((seat) => <Seat seat={seat} key={seat.id} />)}
+        requisicao.then(() => {
 
-                            </ContainerButtun>
-                        </ContainerAssentos>
-                    </Container>
-                    <ContainerInfo>
-                        <Info>
-                            <Selecionado />
-                            <Disponível />
-                            <Indisponível />
-                        </Info>
-                        <Legenda>
-                            <h1>Selecionado</h1>
-                            <h1>Disponível</h1>
-                            <h1>Indisponível</h1>
-                        </Legenda>
+            alert("deuboa")
+            navigate("/sucesso")
+        })
+        requisicao.catch((err) => {
+            console.log(err.response.data)
+        })
 
-
-                    </ContainerInfo>
-                    <ContainerInput>
-                        <h1>Nome do comprador:</h1>
-                        <input placeholder='Digite seu nome...' />
-                        <h1>CPF do comprador:</h1>
-                        <input placeholder='Digite seu CPF...' />
-                    </ContainerInput>
-                    <FooterContainer>
-                        <Post>
-                            <img src={dados.movie.posterURL} alt="filme" />
-                        </Post>
-                        <span>{dados.movie.title}<br />{dados.day.weekday} - {dados.name}</span>
-                    </FooterContainer>
-
-                </>
-            )
-        }
     }
 
 
 
-    const ContainerTitulo = styled.div`
+
+    if (dados === null) {
+        return <div>Carregando...</div>
+    }
+    if (dados !== null) {
+
+        return (
+            <>
+                <ContainerTitulo>
+                    <Titulo>
+                        <h1>Selecione os assentos</h1>
+                    </Titulo>
+                </ContainerTitulo>
+
+                <Container>
+                    <ContainerAssentos>
+                        <ContainerButtun>
+                            {dados.seats.map((seat) => <Seat seat={seat} key={seat.id} setSelectedSeats={setSelectedSeats} selectedSeats={selectedSeats} />)}
+
+                        </ContainerButtun>
+                    </ContainerAssentos>
+                </Container>
+                <ContainerInfo>
+                    <Info>
+                        <Selecionado />
+                        <Disponível />
+                        <Indisponível />
+                    </Info>
+                    <Legenda>
+                        <h1>Selecionado</h1>
+                        <h1>Disponível</h1>
+                        <h1>Indisponível</h1>
+                    </Legenda>
+
+
+                </ContainerInfo>
+                <ContainerInput>
+                    <form>
+                        <h1>Nome do comprador:</h1>
+                        <input placeholder='Digite seu nome...' value={nome} onChange={e => setNome(e.target.value)} required />
+                        <h1>CPF do comprador:</h1>
+                        <input placeholder='Digite seu CPF...' value={cpf} onChange={e => setCpf(e.target.value)} required />
+                        <button onClick={AddIngressos}>Reservar assento(s)</button>
+                    </form>
+                </ContainerInput>
+                <FooterContainer>
+                    <Post>
+                        <img src={dados.movie.posterURL} alt="filme" />
+                    </Post>
+                    <span>{dados.movie.title}<br />{dados.day.weekday} - {dados.name}</span>
+                </FooterContainer>
+                
+
+            </>
+        )
+    }
+}
+
+
+
+const ContainerTitulo = styled.div`
     width: 100%;
     height:auto;
     display:flex;
@@ -95,7 +139,7 @@ export default function RotaAssentos() {
    
 
 `
-    const Titulo = styled.div`
+const Titulo = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
@@ -121,7 +165,7 @@ export default function RotaAssentos() {
     justify-content:center;
     }
 `
-    const Container = styled.div`
+const Container = styled.div`
     width:100%;
     height:auto;
     display:flex;
@@ -129,7 +173,7 @@ export default function RotaAssentos() {
     align-items:center;
 
 `
-    const ContainerAssentos = styled.div`
+const ContainerAssentos = styled.div`
     width:360px;
     height:auto;
 
@@ -175,7 +219,7 @@ color: #000000;
 
 
 `
-    const ContainerButtun = styled.div`
+const ContainerButtun = styled.div`
     margin-left:10px;
     display:flex;
     flex-wrap:wrap;
@@ -183,7 +227,7 @@ color: #000000;
    
     gap: 5px;
 `
-    const ContainerInfo = styled.div`
+const ContainerInfo = styled.div`
     width:100%;
     height:50px;
    
@@ -196,7 +240,7 @@ color: #000000;
 
 
 `
-    const Selecionado = styled.div`
+const Selecionado = styled.div`
     width: 25px;
     height: 25px;
 
@@ -207,7 +251,7 @@ color: #000000;
     border-radius: 17px;
     
 `
-    const Disponível = styled.div`
+const Disponível = styled.div`
     width: 25px;
     height: 25px;
 
@@ -219,7 +263,7 @@ color: #000000;
     border-radius: 17px;
     
 `
-    const Indisponível = styled.div`
+const Indisponível = styled.div`
     width: 25px;
     height: 25px;
     
@@ -230,13 +274,13 @@ color: #000000;
     border-radius: 17px;
     
 `
-    const Info = styled.div`
+const Info = styled.div`
     display:flex;
    
 
 
 `
-    const Legenda = styled.div`
+const Legenda = styled.div`
     display:flex;
    
     
@@ -250,7 +294,7 @@ color: #000000;
     }
     
 `
-    const ContainerInput = styled.div`
+const ContainerInput = styled.div`
     width:100%;
     height:auto;
     margin-top:10px;
@@ -293,8 +337,28 @@ color: #000000;
         margin-left:20px;
     }
 
+    button{
+        width: 225px;
+        height: 42px;
+        margin-left:80px;
+
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.04em;
+
+        color: #FFFFFF;
+        background: #E8833A;
+        border-radius: 3px;
+    }
+
 `
-    const FooterContainer = styled.div`
+const FooterContainer = styled.div`
     width: 100%;
     height: 117px;
 
@@ -323,7 +387,7 @@ color: #000000;
     
    
 `
-    const Post = styled.div`
+const Post = styled.div`
 
     width: 64px;
     height: 89px;

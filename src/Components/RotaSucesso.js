@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function RotaSucesso() {
@@ -16,7 +17,9 @@ export default function RotaSucesso() {
 
             </ContainerInfo>
             <Botao>
-                <button>Voltar pra Home</button>
+                <Link to={"/"}>
+                    <button>Voltar pra Home</button>
+                </Link>
             </Botao>
         </>
 
