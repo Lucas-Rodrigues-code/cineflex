@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Sessao from '../Components/Sessao';
 //Componentes
-import Sessao from './Sessao';
+
 
 export default function RotaSessao() {
 
@@ -26,7 +27,12 @@ export default function RotaSessao() {
     }, [idFilme])
 
     if (dados === null) {
-        return <div>Carregando...</div>
+        return (
+            <ContainerLoading >
+                <img src='https://i.pinimg.com/originals/ef/8b/bd/ef8bbd4554dedcc2fd1fd15ab0ebd7a1.gif' alt='loading' />
+            </ContainerLoading >
+        )
+            
     }
     if (dados !== null) {
 
@@ -39,7 +45,7 @@ export default function RotaSessao() {
                 </ContContainer>
 
                 <Responsivo>
-                    {dados.days.map((d) => <Sessao key={d.id} dado={d}  />)}
+                    {dados.days.map((d) => <Sessao key={d.id} dado={d} />)}
                 </Responsivo>
 
                 <FooterContainer>
@@ -153,4 +159,8 @@ const Post = styled.div`
 
     }
 `
-
+const ContainerLoading = styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+`

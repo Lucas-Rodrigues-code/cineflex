@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Seat from './Seat';
+import Seat from '../Components/Seat';
 
 
 export default function RotaAssentos({setInfoFinal}) {
@@ -37,6 +37,11 @@ export default function RotaAssentos({setInfoFinal}) {
     
     function AddIngressos(e) {
         e.preventDefault()
+        console.log(idSessao)
+        if(selectedSeats.length === 0){
+            alert("Selecione um asseento !")
+            return
+        }
 
         const body = {
             ids: id,
@@ -64,7 +69,11 @@ export default function RotaAssentos({setInfoFinal}) {
     }
 
     if (dados === null) {
-        return <div>Carregando...</div>
+        return (
+            <ContainerLoading >
+                <img src='https://i.pinimg.com/originals/ef/8b/bd/ef8bbd4554dedcc2fd1fd15ab0ebd7a1.gif' alt='loading' />
+            </ContainerLoading >
+        )
     }
     if (dados !== null) {
 
@@ -341,7 +350,6 @@ const ContainerInput = styled.div`
         font-weight: 400;
         font-size: 18px;
         line-height: 21px;
-        display: flex;
         align-items: center;
         text-align: center;
         letter-spacing: 0.04em;
@@ -400,4 +408,9 @@ const Post = styled.div`
         height: 72px;
 
     }
+`
+const ContainerLoading = styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
 `

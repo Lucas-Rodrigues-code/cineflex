@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 //Componentes
-import PostFilm from './PostFilm';
+import PostFilm from '../Components/PostFilm';
 
 
 export default function RotaInicial() {
@@ -25,8 +25,12 @@ export default function RotaInicial() {
 
     }, []);
 
-
-
+    if(dados === null){
+        return(
+            <img src='https://i.pinimg.com/originals/ef/8b/bd/ef8bbd4554dedcc2fd1fd15ab0ebd7a1.gif' alt='loading'/>
+        )
+    }
+    
     return (
         <>
             <Conteudo1>

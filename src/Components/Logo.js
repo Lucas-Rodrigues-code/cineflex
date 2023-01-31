@@ -8,8 +8,6 @@ export default function Logo(){
     )
 }
 
-
-
 const LogoContainer =styled.div`
     width: 100%;
     height: 67px;
@@ -26,6 +24,6 @@ const LogoContainer =styled.div`
         font-weight: 400;
         font-size: 34px;
     }
-
+    
 
 `

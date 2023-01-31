@@ -1,20 +1,15 @@
-//Bibliotecas
 import { createGlobalStyle } from 'styled-components'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// Componentes 
-import RotaSessao from './Components/RotaSessao';
+
 import Logo from "./Components/Logo"
-import RotaInicial from './Components/RotaInicial'
-import RotaAssentos from "./Components/RotaAssentos"
-import RotaSucesso from "./Components/RotaSucesso"
+import RotaInicial from './pages/RotaInicial'
+import RotaAssentos from "./pages/RotaAssentos"
+import RotaSucesso from "./pages/RotaSucesso"
 import { useState } from 'react';
-
-
-
+import RotaSessao from './pages/RotaSessao';
 
 export default function App() {
     const [infoFinal,setInfoFinal] = useState(null)
-   
     return (
         <>
             <GlobalStyle />
@@ -30,8 +25,6 @@ export default function App() {
         </>
     )
 }
-
-
 
 const GlobalStyle = createGlobalStyle`
     body {
